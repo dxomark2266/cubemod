@@ -74,7 +74,7 @@ struct Item
 
 	void SetRarity(ItemRarity rarity)
 	{
-		*(uint8_t*)(this + 0x14) = rarity;
+		*(uint8_t*)(this + 0x8) = rarity;
 	}
 
 	void SetMaterial(Material material)
@@ -218,7 +218,7 @@ struct Item
 					break;
 
 				case ItemRarity::LEGENDARY:
-					if (percentage < 10) rarity_decrease = 4;
+					if (percentage < 30) rarity_decrease = 4;
 					else if (percentage < 25) rarity_decrease = 3;
 					else if (percentage < 50) rarity_decrease = 2;
 					else if (percentage < 75) rarity_decrease = 1;
@@ -228,7 +228,7 @@ struct Item
 						mythic = true;
 
 						//Add a + to mythic items
-						auto plus_delta = GetModifier() % 50;
+						auto plus_delta = GetModifier() % 70;
 						SetModifier(GetModifier() - plus_delta);
 
 						if (GetItemType() == 3) SetMythicWeaponMaterial();
